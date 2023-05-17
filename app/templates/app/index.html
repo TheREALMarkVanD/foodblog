@@ -1,0 +1,35 @@
+{% extends 'app/navbar.html' %}
+{% block content %}
+    <br />
+    <h2 style=" position: relative; left:50px;">{{category}} Recipes</h2>
+    <hr />
+    <!--beginning of cards-->
+    <div class="container mt-3">
+    <div class="row my-2">
+        {% for item in posts %}
+        <div class="col-md-6">
+            <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 text-primary">
+                         {{item.title}}
+                    </strong>
+                    <h3 class="mb-0">{{item.tilte}}</h3>
+                    <div class="mb-1 text-muted">{{item.date}}</div>
+                    <p class="card-text mb-auto">{{item.desc|safe|slice:":100"}}</p>
+                    <a href="{% url 'display' topic=item.title %}{% url 'display' topic=item.title %}" class="stretched-link">Continue reading</a>
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                    <img src="/media/{{item.image}}" class="bd-placeholder-img" width="200" height="250" aria-label="Placeholder: Thumbnail">
+                    <title>Placeholder</title></img>
+                </div>
+            </div>
+        </div>
+        {% if forloop.counter|divisibleby:2%}
+    </div>
+    <div class="row my-2">
+        {%endif%}
+        {%endfor%}
+    </div>
+    </div>
+    <!--end of cards-->
+{% endblock %}
